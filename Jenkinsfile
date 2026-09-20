@@ -29,16 +29,16 @@ pipeline {
         }
 
         stage('Deploy Blue and Green') {
-            steps {
-                bat '''
-                docker rm --force blue 2>NUL
-                docker rm --force green 2>NUL
+    steps {
+        bat '''
+        docker rm --force blue 2>NUL
+        docker rm --force green 2>NUL
 
-                docker run -d -p 3001:3000 --name blue joshika28/nodejs-blue-green:latest
-                docker run -d -p 3002:3000 --name green joshika28/nodejs-blue-green:latest
-                '''
-            }
-        }
+        docker run -d -p 3001:3000 --name blue joshika28/nodejs-blue-green:1.0
+        docker run -d -p 3002:3000 --name green joshika28/nodejs-blue-green:2.0
+        '''
+    }
+}
 
         stage('Test Deployment') {
             steps {
