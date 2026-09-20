@@ -48,5 +48,12 @@ pipeline {
                 '''
             }
         }
+stage('Switch Traffic to Green') {
+    steps {
+        bat '''
+        docker exec blue-green-proxy nginx -s reload
+        '''
+    }
+}
     }
 }
